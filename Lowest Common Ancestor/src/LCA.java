@@ -14,7 +14,6 @@ public class LCA {
     Node root;
 
     Node findLCA(int node1, int node2) {
-
         return findLCA(root, node1, node2);
     }
 
