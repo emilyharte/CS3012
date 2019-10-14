@@ -75,13 +75,13 @@ public class DAG {
 
     public ArrayList<Integer> lowestCommonAncestors(int v1, int v2) {
 
-        ArrayList<Integer> lowestCommmonAncestors = new ArrayList<Integer>();
+        ArrayList<Integer> lowestCommonAncestors = new ArrayList<>();
         if (v1 == v2) {
-            lowestCommmonAncestors.add(v1);
-            return lowestCommmonAncestors;
+            lowestCommonAncestors.add(v1);
+            return lowestCommonAncestors;
         }
         if(v1 < 0 || v1 >= table.length || v2 < 0 || v2 >= table.length) {
-            return null
+            return null;
         }
 
         ArrayList<Integer>[] parentTable = reverse(table);
@@ -94,8 +94,8 @@ public class DAG {
             markAncestors(parentTable, v1Ancestors, v);
         }
 
-        Queue<Integer> currentLevel = new LinkedList<Integer>();
-        Queue<Integer> nextLevel = new LinkedList<Integer>();
+        Queue<Integer> currentLevel = new LinkedList<>();
+        Queue<Integer> nextLevel = new LinkedList<>();
 
         for(int v : parentTable[v2]) {
             currentLevel.add(v);
@@ -106,19 +106,19 @@ public class DAG {
                 int v = currentLevel.remove();
 
                 if(v1Ancestors[v]) {
-                    lowestCommmonAncestors.add(v);
+                    lowestCommonAncestors.add(v);
                 }
 
-                if(lowestCommmonAncestors.isEmpty()) {
+                if(lowestCommonAncestors.isEmpty()) {
                     for (int w : parentTable[v]) {
                         nextLevel.add(w);
                     }
                 }
             }
             currentLevel = nextLevel;
-            nextLevel = new LinkedList<Integer>();
+            nextLevel = new LinkedList<>();
         }
-        return lowestCommmonAncestors;
+        return lowestCommonAncestors;
     }
 
     public void markAncestors(ArrayList<Integer>[] parentTable, boolean[] v1Ancestors, int vertex) {
@@ -134,7 +134,7 @@ public class DAG {
         ArrayList<Integer>[] reversed = (ArrayList<Integer>[]) new ArrayList[table.length];
 
         for(int i = 0; i < reversed.length; i++) {
-            reversed[i] = new ArrayList<Integer>();
+            reversed[i] = new ArrayList<>();
         }
 
         for(int v = 0; v < table.length; v++) {
