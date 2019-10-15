@@ -21,6 +21,14 @@ public class DAG {
         }
     }
 
+    public int getEdges() {
+        return numE;
+    }
+
+    public int getVertices(){
+        return numV;
+    }
+
 
     public void addEdge(int v, int w) {
 
