@@ -2,14 +2,56 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
 
 public class DAGTest {
 
+
     @Test
-    public void graph1() {
+    public void testConstructor(){
+        DAG graph = new DAG(10);
+
+        graph.addEdge(2, 3); //adding directed edge from vertex 2 to vertex 3
+        graph.addEdge(2, 4); //adding directed edge from vertex 2 to vertex 4
+        graph.addEdge(4,5); //adding directed edge from vertex 4 to vertex 5
+        graph.addEdge(7,6); //adding directed edge from vertex 7 to vertex 6
+        graph.addEdge(9, 1); //adding directed edge from vertex 9 to vertex 1
+
+        //test amount of edges and vertices
+        assertEquals(5, graph.getEdges());
+        assertEquals(10, graph.getVertices());
+
+        //test adjacency table
+        String target = "[3, 4]";
+        assertEquals(target, graph.table[2].toString());
+    }
+
+    @Test
+    public void testAddEdge() {
+
+        DAG graph = new DAG(10);
+
+        graph.addEdge(3,7);
+        graph.addEdge(6, 8);
+        graph.addEdge(4,3);
+
+        //this edge will not be added as it will create a cycle
+        graph.addEdge(7,4);
+
+        graph.addEdge(6, 5);
+
+        //this edge will not be added as 11 is greater than 10
+        graph.addEdge(8, 11);
+
+        assertEquals(4, graph.getEdges());
+    }
+
+    @Test
+    public void testLCA1() {
 
         DAG graph = new DAG(13);
 
@@ -35,8 +77,24 @@ public class DAGTest {
         graph.addEdge(11, 12); //adding directed edge from vertex 10 to vertex11
 
         //find LCA
+        ArrayList<Integer> lca = graph.lowestCommonAncestors(8, 9);
+        String target = "[5]";
+        assertEquals(target, lca.toString());
+
+        lca = graph.lowestCommonAncestors(9, 12);
+        target = "[10]";
+        assertEquals(target, lca.toString());
+
+        lca = graph.lowestCommonAncestors(6, 12);
+        target = "[1]";
+        assertEquals(target, lca.toString());
+
+        lca = graph.lowestCommonAncestors(4, 8);
+        target = "[1]";
+        assertEquals(target, lca.toString());
 
 
-        }
     }
+
 }
+
