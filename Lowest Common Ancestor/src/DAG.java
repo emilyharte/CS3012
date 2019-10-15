@@ -145,5 +145,20 @@ public class DAG {
 
         return reversed;
     }
+    public String toString() {
+        return toString(table);
+    }
+
+    public String toString(ArrayList<Integer>[] table) {
+        String string = "";
+        for(int v = 0; v < table.length; v++) {
+            string += v + ": ";
+            for(int vertex : table[v]) {
+                string += vertex + " ";
+            }
+            string += "\n";
+        }
+        return string;
+    }
 
 }
