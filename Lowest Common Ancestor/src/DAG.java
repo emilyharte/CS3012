@@ -8,14 +8,19 @@ public class DAG {
     public static final int UNVISITED = 0, IN_PROGRESS = 1, VISITED = 2;
 
     public ArrayList<Integer>[] table; //adjacency table
+    public int numV; //no. of vertices
+    public int numE; //no. of edges
 
     public DAG(int num) {
 
+        this.numV = num;
+        this.numE = 0;
         table = (ArrayList<Integer>[]) new ArrayList[num];
         for (int i = 0; i < num; i++) {
             table[i] = new ArrayList<>();
         }
     }
+
 
     public void addEdge(int v, int w) {
 
@@ -28,11 +33,13 @@ public class DAG {
         ArrayList<Integer> list = table[v];
         if(!list.contains(w)); {
             list.add(w);
+            numE++;
         }
         if(containsCycle()) {
             for(int i =0; i < list.size(); i++) {
                 if(list.get(i) == w) {
                     list.remove(i);
+                    numE--;
                 }
             }
         }
@@ -145,20 +152,4 @@ public class DAG {
 
         return reversed;
     }
-    public String toString() {
-        return toString(table);
-    }
-
-    public String toString(ArrayList<Integer>[] table) {
-        String string = "";
-        for(int v = 0; v < table.length; v++) {
-            string += v + ": ";
-            for(int vertex : table[v]) {
-                string += vertex + " ";
-            }
-            string += "\n";
-        }
-        return string;
-    }
-
 }
