@@ -30,6 +30,11 @@ public class DAGTest {
         assertEquals(target, graph.table[2].toString());
     }
 
+    @Test (expected=Exception.class)
+    public void testNegativeConstructor() {
+        DAG graph = new DAG(-3);
+    }
+
     @Test
     public void testAddEdge() {
 
@@ -54,6 +59,11 @@ public class DAGTest {
     public void testLCA1() {
 
         DAG graph = new DAG(13);
+
+        //test empty graph
+        ArrayList<Integer> empty = graph.lowestCommonAncestors(3, 4);
+        String emptyTarget = "[]";
+        assertEquals(emptyTarget, empty.toString());
 
         graph.addEdge(1, 2); //adding directed edge from vertex 1 to vertex 2
         graph.addEdge(1, 3); //adding directed edge from vertex 1 to vertex 3
@@ -92,8 +102,7 @@ public class DAGTest {
         lca = graph.lowestCommonAncestors(4, 8);
         target = "[1]";
         assertEquals(target, lca.toString());
-
-
+        
     }
 
 }
