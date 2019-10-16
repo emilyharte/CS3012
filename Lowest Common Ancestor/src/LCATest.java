@@ -21,6 +21,9 @@ public class LCATest {
 
         LCA tree = new LCA();
 
+        //check an empty tree
+        assertEquals(null, tree.findLCA(2, 3));
+
         tree.root = new Node(3);
 
         //left subtree
@@ -42,6 +45,9 @@ public class LCATest {
         result = tree.findLCA(6, 8);
         assertEquals(3, result.data);
 
+        //check with nodes not in tree
+        assertEquals(null, tree.findLCA(9, 10));
+
     }
 
     @Test
@@ -61,6 +67,9 @@ public class LCATest {
         LCA tree = new LCA();
 
         tree.root = new Node(2);
+
+        //check empty tree
+        assertEquals(null, tree.findLCA(4, 5));
 
         //left subtree
         tree.root.left = new Node(5);
@@ -91,6 +100,9 @@ public class LCATest {
         result = tree.findLCA(7, 10);
         assertEquals(2, result.data);
 
+        //check with nodes not in tree
+        assertEquals(null, tree.findLCA(20, 11));
+
     }
 
     @Test
@@ -108,6 +120,10 @@ public class LCATest {
          */
 
         LCA tree = new LCA();
+
+        //check empty tree
+        assertEquals(null, tree.findLCA(6, 2));
+
         tree.root = new Node(6);
 
         //left subtree
@@ -151,6 +167,9 @@ public class LCATest {
 
         result = tree.findLCA(3, 8);
         assertEquals(6, result.data);
+
+        //check with nodes not in tree
+        assertEquals(null, tree.findLCA(21, 30));
 
     }
 
